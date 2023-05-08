@@ -8,17 +8,29 @@ using namespace std;
 
 int length(string s)
 {
-   return 0;
+    int i=0;
+    while (s[i]!='\0'){
+        i++;
+    }
+   return i;
 }
 
 int charCount(string s,char c)
 {
-   return 0;
+    int letraEncontrada=0;
+    for (int i = 0;s[i]!= '\0'; ++i) {
+        if (s[i]==c)letraEncontrada+=1;
+    }
+    return letraEncontrada;
 }
 
 string substring(string s,int d,int h)
 {
-   return "";
+    string subcad;
+    for (int i = d; i < h; i++) {
+        subcad += s[i];// concatena caracteres
+    }
+    return subcad;
 }
 
 string substring(string s,int d) // ok
