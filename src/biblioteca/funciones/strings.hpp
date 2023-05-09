@@ -220,7 +220,7 @@ char stringToChar(string s)
     return letra;
 }
 
-string stringToString(string s)
+string stringToString(string& s)
 {
     string mismaCadena;
     mismaCadena=s;
@@ -252,7 +252,7 @@ bool startsWith(string s,string x)
         return true;
     }else{
         return false;
-    };
+    }
 }
 
 bool endsWith(string s,string x)
@@ -268,114 +268,175 @@ bool endsWith(string s,string x)
     }
 }
 
-bool contains(string s,char c)
+bool contains(string s,char c)//ok
 {
-   return true;
+    for(int i = 0; s[i]!='\0'; i++){
+        if (s[i]== c)return true;
+    }
+    return false;
 }
 
 string replace(string s,char oldChar,char newChar)
 {
-   return "";
+    for(int i = 0; s[i]!='\0'; i++){
+        if (s[i]== oldChar)s[i]=newChar;
+    }
+    return s;
 }
 
-string insertAt(string s,int pos,char c)
+string insertAt(string& s,int pos,char c)
 {
-   return "";
+    string parte1=substring(s,0,pos), parte2=substring(s,pos, length(s));
+    return parte1+c+parte2;
 }
 
-string removeAt(string s,int pos)
+string removeAt(string& s,int pos)
 {
-   return "";
+    string parte1=substring(s,0,pos), parte2=substring(s,pos+1, length(s));
+    return parte1+parte2;
 }
 
 string ltrim(string s)
 {
-   return "";
+    int i=0;
+    while (s[i]==' '){
+        i++;
+    }
+    return substring(s,i);
 }
 
 string rtrim(string s)
 {
-   return "";
+    string cadRev, cadAux,cadFinal;
+    // invierto la cadena con espacio
+    for (int i= length(s)-1; i >=0 ; --i) {
+        cadRev+=s[i];
+    }
+    cadAux= ltrim(cadRev);// cadena invertida sin espacios
+    // vuelvo a invertir la cadea sin espacios
+    for (int i= 0; i < length(cadAux) ; ++i) {
+        cadFinal+=s[i];
+    }
+
+    return cadFinal;
+
 }
 
-string trim(string s)
+string trim(string& s)
 {
-   return "";
+    return rtrim(ltrim(s));
 }
 
-string replicate(char c,int n)
-{
-   return "";
+string replicate(char c,int n) {
+    string cad;
+    while(n>0){
+        cad+=c;
+        n--;
+    }
+    return cad;
 }
 
 string spaces(int n)
 {
-   return "";
+    char c=' ';
+    return replicate(c,n);
 }
 
-string lpad(string s,int n,char c)
+string lpad(string& s,int n,char c)
 {
-   return "";
+    int i= length(s);
+    string completo;
+    while(i<n){
+        completo+=c;
+        i++;
+    }
+    return completo+s;
 }
 
 string rpad(string s,int n,char c)
 {
-   return "";
+    while(length(s)<n){
+        s+=c;
+    }
+    return s;
 }
 
-string cpad(string s,int n,char c)
+string cpad(string& s,int n,char c)
 {
-   return "";
+    string ss= lpad(s,n/2+2,c);
+    return rpad(ss,n,c);
 }
 
 bool isDigit(char c)
 {
-   return true;
+    return (c>=48&&c<=57);
 }
 
 bool isLetter(char c)
 {
-   return true;
+    return ((c>=65&&c<=90)||(c>=97&&c<=122));
 }
 
-bool isUpperCase(char c)
+bool isUpperCase(char c)//ok
 {
-   return true;
+    // uzando ascii
+    return (c>=65 && c<=90);
 }
 
-bool isLowerCase(char c)
+bool isLowerCase(char c)//ok
 {
-   return true;
+    return (c>=97&&c<=122);
 }
 
 char toUpperCase(char c)
 {
-   return 'X';
+    if(isLowerCase(c)){
+        return c-=32;
+    }else{
+        return c;
+    }
+
 }
 
 char toLowerCase(char c)
 {
-   return 'X';
+    if(isUpperCase(c)){
+        return c+=32;
+    }else{
+        return c;
+    }
 }
 
 string toUpperCase(string s)
 {
-   return "";
+    string cadMayuscula;
+    for (int i = 0; s[i]!='\0'; ++i) {
+        cadMayuscula+= toUpperCase(s[i]);
+    }
+    return cadMayuscula;
 }
 
 string toLowerCase(string s)
 {
-   return "";
+    string cadMinuscula;
+    for (int i = 0; s[i]!='\0'; ++i) {
+        cadMinuscula+=  toLowerCase(s[i]);
+    }
+    return cadMinuscula;
 }
 
-int cmpString(string a,string b)
+int cmpString(string& a,string& b)
 {
-   return 0;
+    if (length(a)< length(b))return -1;
+    if (length(a)> length(b))return 1;
+    if (length(a)== length(b))return 0;
 }
 
 int cmpDouble(double a,double b)
 {
-   return 0;
+    if(a<b)return -1;
+    if(a>b)return 1;
+    if (a==b)return 0;
 }
 
 #endif
