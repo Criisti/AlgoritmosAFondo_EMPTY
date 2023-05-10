@@ -55,15 +55,55 @@ int indexOf(string s,char c,int offSet) // ok
 
 int indexOf(string s,string toSearch) // 1.1.1.7
 {
-   return 0;
+    int contLetrasIguales=0, cont= length(toSearch),j=0;
+
+    for (int i = 0; i<= length(s) ; ++i) {
+        if(s[i]==toSearch[j]){
+            contLetrasIguales+=1;
+            j++;
+
+            if(contLetrasIguales== cont&& s[i+1]==' '|| s[i]=='\0'){
+                    if(s[i-cont]==' '){
+                        return i-cont+1;
+                    }else {
+                        // solo para el caso de que toSearch sea la ultima palabra
+                        return i-cont;
+                    }
+            }
+        }else{
+            j=0;
+            contLetrasIguales=0;
+        }
+    }
+    if(contLetrasIguales==0||j==0)return -1;
 }
 
 int indexOf(string s,string toSearch,int offset) // 1.1.1.8
 {
+    int contLetrasIguales=0, cont= length(toSearch),j=0;
 
+    for (int i = offset; i<= length(s) ; ++i) {
+        if(s[i]==toSearch[j]){
+            contLetrasIguales+=1;
+            j++;
+
+            if(contLetrasIguales== cont&& s[i+1]==' '|| s[i]=='\0'){
+                if(s[i-cont]==' '){
+                    return i-cont+1;
+                }else {
+                    // solo para el caso de que toSearch sea la ultima palabra
+                    return i-cont;
+                }
+            }
+        }else{
+            j=0;
+            contLetrasIguales=0;
+        }
+    }
+    if(contLetrasIguales==0||j==0)return -1;
 }
 
-int lastIndexOf(string s,char c)// 1.1.1.9 Inversa 1.1.1.5
+int lastIndexOf(string s,char c)
 {
     for (int i= length(s);i>=0;i--){
         if(s[i]==c)return i;
