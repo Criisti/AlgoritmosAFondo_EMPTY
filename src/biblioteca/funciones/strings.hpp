@@ -162,9 +162,24 @@ int digitCount(int n)
     return aux;
 }
 
-string intToString(int i)//1.1.1.15
+string intToString(int i)//1.1.1.15 muy raro el caso cuando el primer elemento es 0
 {
-   return "";
+   int cantEntero= digitCount(i);
+   int j=0,resto;
+   string cadEnteros;
+   char numLetra;
+   while(j<cantEntero){
+       resto=i%10;
+       i/=10;
+       numLetra= intToChar(resto);
+       cadEnteros=cadEnteros + numLetra;
+       j++;
+   }
+   string cadEnterosInvertida;
+    for (int k = length(cadEnteros)-1; k>=0; --k) { // -1 para omitir el 1 \0 de cadEntros
+        cadEnterosInvertida+=cadEnteros[k];
+    }
+    return cadEnterosInvertida;
 }
 
 int stringToInt(string s,int b) // ok
@@ -269,12 +284,50 @@ string stringToString(string& s)
 
 string doubleToString(double d)//1.1.1.21
 {
-   return "";
+/*    // funciona con mayor cantidad de enteros o iguales a los decimales
+
+    int cadEnteros=digitCount(d); // cuantos enteros tiene //3
+    int parEntera=d; // los enteros //123
+    int parEntera2=parEntera; //123
+    int  decimal;
+
+    while(cadEnteros>0){
+        d*=10;
+        parEntera*=10;
+        cadEnteros--;
+    }
+    int deci=d;
+    decimal = abs(parEntera -deci);
+
+    return intToString(parEntera2)+","+ intToString(decimal);*/
+    string cad= to_string(d);
+    return cad;
 }
 
 double stringToDouble(string s)//1.1.1.22
 {
-   return 1.1;
+    int posComa = indexOf(s,'.');
+    string entero,decimal;
+    for (int i = 0; s[i]!='.'; ++i) {
+        entero += s[i];
+    }
+    for (int i = posComa+1; s[i]!='\0' ; ++i) {
+        decimal+=s[i];
+    }
+    double enteroEntero= stringToInt(entero);
+    // double enteroo= enteroEntero;
+    int entDecimal= stringToInt(decimal);
+    double deci=entDecimal;
+    int  auxDeci= digitCount(entDecimal);
+    while (auxDeci>0){
+        deci/=10;
+        auxDeci--;
+    }
+    return enteroEntero+deci;
+    /* opcion b
+     *double num = stod(s);
+     * return num;
+     * */
 }
 
 bool isEmpty(string s)
