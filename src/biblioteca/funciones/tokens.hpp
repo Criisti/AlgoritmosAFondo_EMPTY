@@ -8,7 +8,32 @@ using namespace std;
 
 int tokenCount(string s,char sep)
 {
-   return 0;
+    int cantSep= charCount(s,sep);
+    int i=1, posSep, posSep2=0;
+    string cadToken;
+    int contToken=0;
+    while (i<=cantSep){
+        posSep= indexOfN(s,sep,i);
+        cadToken=substring(s,posSep2,posSep);
+        if(!isEmpty(cadToken)){
+            contToken+=1;
+        }
+        posSep2=posSep+1;
+        //cout<<cadToken<<endl; muestra los tokens
+        cadToken="";
+        i++;
+    }
+    // cuando ya no existe el separador
+    i-=1;
+    if (cantSep==0|| i==cantSep){
+        int l= length(s);
+        posSep=l;
+        cadToken= substring(s,posSep2,posSep);
+        if(!isEmpty(cadToken))contToken+=1;
+        //cout<<cadToken<<endl;// muestra el ultimo token
+    }
+    return contToken;
+
 }
 
 void addToken(string& s,char sep,string t)
