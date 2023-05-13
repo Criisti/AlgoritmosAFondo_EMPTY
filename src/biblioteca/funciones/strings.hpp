@@ -55,7 +55,7 @@ int indexOf(string s,char c,int offSet) // ok
 
 int indexOf(string s,string toSearch) // 1.1.1.7
 {
-   int contLetrasIguales=0, cont= length(toSearch),j=0;
+    int contLetrasIguales=0, cont= length(toSearch),j=0;
 
     for (int i = 0; i<= length(s) ; ++i) {
         if(s[i]==toSearch[j]){
@@ -76,7 +76,6 @@ int indexOf(string s,string toSearch) // 1.1.1.7
         }
     }
     if(contLetrasIguales==0||j==0)return -1;
-
 }
 
 int indexOf(string s,string toSearch,int offset) // 1.1.1.8
